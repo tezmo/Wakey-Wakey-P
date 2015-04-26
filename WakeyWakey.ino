@@ -3,6 +3,11 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_HMC5883_U.h>
 
+// to do
+// - add accelerometer reading
+// - add sound to wake up
+// - add light to wake up
+
 boolean debug = true;            // extra debug info?
 
 boolean movement;                   // holds movement detection
@@ -124,14 +129,20 @@ void loop() {
         case SHORT:
            state = SNOOZE;
            digitalWrite(motorPin, LOW); 
+           // stop sound
+           //light off
            snoozeMillis = millis();
            break;
         case LONG:
-          digitalWrite(motorPin, LOW); 
+          digitalWrite(motorPin, LOW);
+           // stop sound
+           //light off          
           state = CALIBRATION;
           break;
         default:
             digitalWrite(motorPin, HIGH);
+            // play sound
+            // light on
             state = WAKEYWAKEY;
             break;
       }
